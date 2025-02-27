@@ -14,6 +14,21 @@ EXPOSE 8000
 
 # DEV default value = false
 ARG DEV=false
+
+# kitty-terminfo not available yet in 3.13
+#
+# # RUN apk add --update kitty-terminfo \
+# # 	&& rm -rf /var/cache/apk/*
+# # RUN apk update && apk search kitty-terminfo
+#
+# # Ensure community repository is enabled
+# RUN VERSION="v$(cut -d'.' -f1,2 /etc/alpine-release)" \
+# 	&& echo "https://dl-cdn.alpinelinux.org/alpine/$VERSION/main/" > /etc/apk/repositories \
+# 	&& echo "https://dl-cdn.alpinelinux.org/alpine/$VERSION/community/" >> /etc/apk/repositories
+# # Install additional software
+# RUN apk update
+# 	# && apk add kitty-terminfo
+
 RUN python -m venv /py && \
 	/py/bin/pip install --upgrade pip && \
 	/py/bin/pip install -r /tmp/requirements.txt && \
