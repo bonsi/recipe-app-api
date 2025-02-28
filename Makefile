@@ -1,8 +1,14 @@
-.PHONY: up down test lint
+.PHONY: up down test lint migrations migrate
 
 # Set dir of Makefile to a variable to use later
 MAKEPATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 PWD := $(dir $(MAKEPATH))
+
+migrate:
+	docker compose run --rm app sh -c "python manage.py wait_for_db && python manage.py migrate"
+
+migrations:
+	docker compose run --rm app sh -c "python manage.py makemigrations"
 
 test:
 	docker compose run --rm app sh -c "python manage.py test"

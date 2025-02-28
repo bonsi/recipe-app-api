@@ -26,6 +26,8 @@ SECRET_KEY = "django-insecure-+7$j0zrirh(l41^q0h$6m3pe0crc)fx$&lxzax!-6rzc8g36bk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+TEST_RUNNER = "redgreenunittest.django.runner.RedGreenDiscoverRunner"
+
 ALLOWED_HOSTS = []
 
 
@@ -128,3 +130,5 @@ STATIC_URL = "/static/"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "core.User"
