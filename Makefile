@@ -1,4 +1,4 @@
-.PHONY: up down test
+.PHONY: up down test lint
 
 # Set dir of Makefile to a variable to use later
 MAKEPATH := $(abspath $(lastword $(MAKEFILE_LIST)))
@@ -6,6 +6,9 @@ PWD := $(dir $(MAKEPATH))
 
 test:
 	docker compose run --rm app sh -c "python manage.py test"
+
+lint:
+	docker compose run --rm app sh -c "flake8"
 
 up:
 	docker compose up -d 
