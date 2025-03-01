@@ -1,8 +1,11 @@
-.PHONY: up down test lint migrations migrate
+.PHONY: up down test lint migrations migrate createsuperuser
 
 # Set dir of Makefile to a variable to use later
 MAKEPATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 PWD := $(dir $(MAKEPATH))
+
+createsuperuser:
+	docker compose run --rm app sh -c "python manage.py createsuperuser"
 
 migrate:
 	docker compose run --rm app sh -c "python manage.py wait_for_db && python manage.py migrate"
